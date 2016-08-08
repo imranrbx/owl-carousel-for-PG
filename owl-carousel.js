@@ -13,12 +13,6 @@ $(function() {
          f.detect = function(pgPage) {
             return pgPage.hasScript(/(^|\/)owl.*\.js/i); //detect just if OWL is already on the page
         }
-        //Add resources that will be copied to components/<plugin> folder and included in the page with Pinegrow Resource manager when the plugin is first activated on a page or when Resources command is used in "Manage libraries and plugins".
-        pinegrow.addFramework(f);  
-        //That's it!!! Simple, right? A lot of magic stuff could be done here, check Bootstrap framework for inspiration.
-        
-        var directives_actions = []; // Will be shown in ACT tab
-
         //Tell Pinegrow about the framework
         pinegrow.addFramework(f);
 
@@ -36,16 +30,16 @@ $(function() {
             var id = pinegrow.getUniqueId('owl_slider');
 
             return '<div id="' + id + '" class="owl-carousel">\
-                    <div class="item" >\
+                    <div class="item lazyOwl" >\
                         <img src="$IMAGE_URL">\
                     </div>\
-                    <div class="item" >\
+                    <div class="item lazyOwl" >\
                         <img src="$IMAGE_URL">\
                     </div>\
-                    <div class="item" >\
+                    <div class="item lazyOwl" >\
                         <img src="$IMAGE_URL">\
                     </div>\
-                     <div class="item" >\
+                     <div class="item lazyOwl" >\
                         <img src="$IMAGE_URL">\
                     </div>\
                  </div>';
@@ -59,8 +53,15 @@ $(function() {
                                \n var $rows = $("div#'+id+'").attr("data-rows");\
                                \n var $navigation = $("#'+id+'").attr("data-navigation");\
                                \n var $singleItem = $("#'+id+'").attr("data-single");\
+                               \n var $lazyload = $("#'+id+'").attr("data-lazy");\
+                               \n var $transition = $("#'+id+'").attr("data-transition");\
                                \n if (typeof($rows) == "undefined"){$rows="4";}\
-                               \n $("#' + id + '").owlCarousel({items:$rows, navigation: Boolean($navigation), singleItem: Boolean($singleItem)});\
+                               \n $("#' + id + '").owlCarousel({\
+                                \n items: $rows,\
+                                \n transitionStyle: $transition,\
+                                \n navigation: Boolean($navigation),\
+                                \n singleItem: Boolean($singleItem),\
+                                \n lazyLoad: Boolean($lazyload)});\
                                \n });';
                 pinegrow.addScriptToPage(page, ini_str);
                 pinegrow.showNotice('<p>OWL slider initialization Javascript was appended to the end of the page:</p><pre>' + escapeHtmlCode(ini_str) + '</pre><p>If you change the #id of the slider element you\'ll need to update the selector in this code. You also need to <b>include OWL slider Javascript</b> to the page.</p>', 'OWL Slider inserted', 'owl-on-inserted');
@@ -90,7 +91,7 @@ $(function() {
         slide.code = function() {
             var img1 = pinegrow.getPlaceholderImage();
 
-            return '<div class="item">\
+            return '<div class="item lazyOwl">\
                         <img src="$IMAGE_URL">\
                     </div>';
         };
@@ -124,13 +125,25 @@ $(function() {
         r.footer = false;
         f.resources.add(r);
 
+        r = new PgComponentTypeResource(f.getResourceFile('./assets/grabbing.png'));
+        r.relative_url = 'css/grabbing.png';
+        r.source = crsaMakeFileFromUrl(r.url);
+        r.footer = false;
+        f.resources.add(r);
+
+         r = new PgComponentTypeResource(f.getResourceFile('./assets/AjaxLoader.gif'));
+        r.relative_url = 'css/AjaxLoader.gif';
+        r.source = crsaMakeFileFromUrl(r.url);
+        r.footer = false;
+        f.resources.add(r);
+
         slider.sections = {
             'owl.app.single' : {
                 'name' : 'Owl Slider Properties',
                 'fields' : {
                     'owl.app.checkbox1': {
                             'type' : 'checkbox',
-                            'name' : 'Show Single Item ?',
+                            'name' : 'Show Single Image ?',
                             'value' : "1",
                             'action' : 'custom',
                             get_value: function(obj) {
@@ -148,7 +161,6 @@ $(function() {
                                         pgel.removeAttr('data-single');
                                     }
                                 }
-                                showJavascriptMessage();
                                 return value;
                             }
                         },
@@ -172,18 +184,54 @@ $(function() {
                                         pgel.removeAttr('data-navigation');
                                     }
                                 }
-                                showJavascriptMessage();
                                 return value;
                             }
                         },
                             'owl.app.text': {
                             'type' : 'text',
-                            'name' : 'Type a Number:',
+                            'name' : 'How Many Images:',
                             'action' : 'element_attribute',
                             'attribute' : 'data-rows',
                             'attribute_keep_if_empty' : false
+                    },
+                    'owl.app.checkbox3': {
+                             'type' : 'checkbox',
+                            'name' : 'Lazy Load ?',
+                            'value' : "1",
+                            'action' : 'custom',
+                            get_value: function(obj) {
+                                var $el = obj.data;
+                                var pgel = new pgQuery($el);
+                                return pgel.attr('data-lazy') == 'true';
+                            },
+                            set_value: function(obj, value, values, oldValue, eventType) {
+                                var $el = obj.data;
+                                var pgel = new pgQuery($el);
+                                if(value) {
+                                    pgel.attr('data-lazy', 'true');
+                                } else {
+                                    if(pgel.attr('data-lazy') == 'true') {
+                                        pgel.removeAttr('data-lazy');
+                                    }
+                                }
+                                return value;
+                            }
+                        },
+                            'owl.app.transition': {
+                                 'type': 'select',
+                                    'name': 'Select Transition ?',
+                                    'action': 'element_attribute',
+                                    'attribute' : 'data-transition',
+                                    'show_empty' : false,
+                                    'options' : [
+                                        {'key' : 'fade', 'name' : 'fade'},
+                                        {'key' : 'fadeUp', 'name' : 'fadeUp'},
+                                        {'key' : 'goDown', 'name' : 'goDown'},
+                                        {'key' : 'backSlide', 'name' : 'backSlide'},   
+                                    ]
+                            }
+                        
                     }
-                }
             }
         };
 
