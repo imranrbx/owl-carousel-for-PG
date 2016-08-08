@@ -1,3 +1,8 @@
+/*
+Created by itsmeleo for Pinegrow Web Editor
+Licensed under MIT license
+Feel free to use the code in your own Pinegrow
+ */
 $(function() {
 
     //Wait for Pinegrow to wake-up
@@ -64,7 +69,8 @@ $(function() {
                                 \n transitionStyle: $transition,\
                                 \n navigation: Boolean($navigation),\
                                 \n singleItem: Boolean($singleItem),\
-                                \n lazyLoad: Boolean($lazyload)});\
+                                \n lazyLoad: Boolean($lazyload)\
+                                \n });\
                                \n });';
                 pinegrow.addScriptToPage(page, ini_str);
                 pinegrow.showNotice('<p>OWL slider initialization Javascript was appended to the end of the page:</p><pre>' + escapeHtmlCode(ini_str) + '</pre><p>If you change the #id of the slider element you\'ll need to update the selector in this code. You also need to <b>include OWL slider Javascript</b> to the page.</p>', 'OWL Slider inserted', 'owl-on-inserted');
