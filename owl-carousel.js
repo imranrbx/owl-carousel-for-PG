@@ -57,10 +57,10 @@ $(function() {
             if(id) {
                 var ini_str = 'jQuery(function($){\
                                \n var $rows = $("div#'+id+'").attr("data-rows");\
-                               \n var $navigation = Boolean($("#'+id+'").attr("data-navigation"));\
-                               \n var $singleItem = Boolean($("#'+id+'").attr("data-single"));\
+                               \n var $navigation = $("#'+id+'").attr("data-navigation");\
+                               \n var $singleItem = $("#'+id+'").attr("data-single");\
                                \n if (typeof($rows) == "undefined"){$rows="4";}\
-                               \n $("#' + id + '").owlCarousel({items:$rows,navigation:$navigation,singleItem:$singleItem});\
+                               \n $("#' + id + '").owlCarousel({items:$rows, navigation: Boolean($navigation), singleItem: Boolean($singleItem)});\
                                \n });';
                 pinegrow.addScriptToPage(page, ini_str);
                 pinegrow.showNotice('<p>OWL slider initialization Javascript was appended to the end of the page:</p><pre>' + escapeHtmlCode(ini_str) + '</pre><p>If you change the #id of the slider element you\'ll need to update the selector in this code. You also need to <b>include OWL slider Javascript</b> to the page.</p>', 'OWL Slider inserted', 'owl-on-inserted');
@@ -124,91 +124,68 @@ $(function() {
         r.footer = false;
         f.resources.add(r);
 
-         //Properties are arranged in sections
-        var application_action = new PgComponentType('owl-app-rows', 'Number of Items per Row');
-        //application_action.selector = ".owl-carousel";
-        application_action.attribute = 'data-rows';
-        application_action.action = true;
-        application_action.not_main_type = true;
-       // application_action.helplink = '1.2.29/docs/api/ng/directive/ngApp';
-        application_action.sections = {
-            'owl.app.parameters' : {
-                'name' : 'style',
+        slider.sections = {
+            'owl.app.single' : {
+                'name' : 'Owl Slider Properties',
                 'fields' : {
-                    'owl.app.text': {
-                        'type' : 'text',
-                        'name' : 'Type a Number:',
-                        'action' : 'element_attribute',
-                        'attribute' : 'data-rows',
-                        'attribute_keep_if_empty' : false
+                    'owl.app.checkbox1': {
+                            'type' : 'checkbox',
+                            'name' : 'Show Single Item ?',
+                            'value' : "1",
+                            'action' : 'custom',
+                            get_value: function(obj) {
+                                var $el = obj.data;
+                                var pgel = new pgQuery($el);
+                                return pgel.attr('data-single') == 'true';
+                            },
+                            set_value: function(obj, value, values, oldValue, eventType) {
+                                var $el = obj.data;
+                                var pgel = new pgQuery($el);
+                                if(value) {
+                                    pgel.attr('data-single', 'true');
+                                } else {
+                                    if(pgel.attr('data-single') == 'true') {
+                                        pgel.removeAttr('data-single');
+                                    }
+                                }
+                                showJavascriptMessage();
+                                return value;
+                            }
+                        },
+                         'owl.app.checkbox2': {
+                             'type' : 'checkbox',
+                            'name' : 'Show Navigation ?',
+                            'value' : "1",
+                            'action' : 'custom',
+                            get_value: function(obj) {
+                                var $el = obj.data;
+                                var pgel = new pgQuery($el);
+                                return pgel.attr('data-navigation') == 'true';
+                            },
+                            set_value: function(obj, value, values, oldValue, eventType) {
+                                var $el = obj.data;
+                                var pgel = new pgQuery($el);
+                                if(value) {
+                                    pgel.attr('data-navigation', 'true');
+                                } else {
+                                    if(pgel.attr('data-navigation') == 'true') {
+                                        pgel.removeAttr('data-navigation');
+                                    }
+                                }
+                                showJavascriptMessage();
+                                return value;
+                            }
+                        },
+                            'owl.app.text': {
+                            'type' : 'text',
+                            'name' : 'Type a Number:',
+                            'action' : 'element_attribute',
+                            'attribute' : 'data-rows',
+                            'attribute_keep_if_empty' : false
                     }
                 }
             }
         };
-         directives_actions.push(application_action);
-        application_action = new PgComponentType('owl-app-navigation', 'Enable/Disable Navigation');
-        //application_action.selector = ".owl-carousel";
-        application_action.attribute = 'data-navigation';
-        application_action.action = true;
-        application_action.not_main_type = true;
-        //application_action.helplink = '1.2.29/docs/api/ng/directive/ngApp';
-        application_action.sections = {
-            'owl.app.parameters' : {
-                'name' : 'navigation',
-                'fields' : {
-                    'owl.app.text': {
-                         type: 'select',
-                            name: 'Navigation ?',
-                            action: 'element_attribute',
-                            attribute : 'data-navigation',
-                            'show_empty' : false,
-                            'options' : [
-                                {'key' : 'true', 'name' : 'Yes'},
-                                
-                            ]
-                    }
-                }
-            }
-        };
-        directives_actions.push(application_action);
-        application_action = new PgComponentType('owl-app-single', 'Enable Single Item');
-        //application_action.selector = ".owl-carousel";
-        application_action.attribute = 'data-single';
-        application_action.action = true;
-        application_action.not_main_type = true;
-        //application_action.helplink = '1.2.29/docs/api/ng/directive/ngApp';
-        application_action.sections = {
-            'owl.app.parameters' : {
-                'name' : 'singleItem',
-                'fields' : {
-                    'owl.app.text': {
-                         type: 'select',
-                            name: 'Single Item ?',
-                            action: 'element_attribute',
-                            attribute : 'data-single',
-                            'show_empty' : false,
-                            'options' : [
-                                {'key' : 'true', 'name' : 'Yes'},
-                                
-                            ]
-                    }
-                }
-            }
-        };
-        directives_actions.push(application_action);
-
-        var addComponentTypesToPG = function(list) {
-            for(var i = 0; i < list.length; i++) {
-                f.addComponentType(list[i]);
-            }
-        }
-
-        addComponentTypesToPG(directives_actions);
-
-        var section = new PgFrameworkLibSection('owldirectivesactions', 'Owl Slider');
-        section.setComponentTypes( directives_actions );
-        section.closed = true;
-        f.addActionsSection(section);
 
         //Now, lets define sections and elements shown in LIB tab
         var section = new PgFrameworkLibSection('owl-elements', 'Owl Slider');
