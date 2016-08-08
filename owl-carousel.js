@@ -54,10 +54,13 @@ $(function() {
                                \n var $navigation = $("#'+id+'").attr("data-navigation");\
                                \n var $singleItem = $("#'+id+'").attr("data-single");\
                                \n var $lazyload = $("#'+id+'").attr("data-lazy");\
+                               \n var $speed = $("#'+id+'").attr("data-speed");\
                                \n var $transition = $("#'+id+'").attr("data-transition");\
                                \n if (typeof($rows) == "undefined"){$rows="4";}\
+                               \n if (typeof($speed) == "undefined"){$speed=false;}\
                                \n $("#' + id + '").owlCarousel({\
                                 \n items: $rows,\
+                                \n autoPlay: $speed,\
                                 \n transitionStyle: $transition,\
                                 \n navigation: Boolean($navigation),\
                                 \n singleItem: Boolean($singleItem),\
@@ -187,7 +190,7 @@ $(function() {
                                 return value;
                             }
                         },
-                            'owl.app.text': {
+                        'owl.app.text': {
                             'type' : 'text',
                             'name' : 'How Many Images:',
                             'action' : 'element_attribute',
@@ -229,7 +232,14 @@ $(function() {
                                         {'key' : 'goDown', 'name' : 'goDown'},
                                         {'key' : 'backSlide', 'name' : 'backSlide'},   
                                     ]
-                            }
+                            },
+                        'owl.app.speed': {
+                            'type' : 'text',
+                            'name' : 'Autoplay Speed',
+                            'action' : 'element_attribute',
+                            'attribute' : 'data-speed',
+                            'attribute_keep_if_empty' : false
+                    }
                         
                     }
             }
