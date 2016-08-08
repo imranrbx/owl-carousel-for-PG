@@ -11,7 +11,7 @@ $(function() {
         f.allow_single_type = true;
         //Tell Pinegrow about the framework and loads necessary plugins
          f.detect = function(pgPage) {
-            return pgPage.hasScript(/(^|\/)jquery.*\.js/i);
+            return pgPage.hasScript(/(^|\/)owl.*\.js/i); //detect just if OWL is already on the page
         }
         //Add resources that will be copied to components/<plugin> folder and included in the page with Pinegrow Resource manager when the plugin is first activated on a page or when Resources command is used in "Manage libraries and plugins".
         pinegrow.addFramework(f);  
@@ -26,31 +26,27 @@ $(function() {
        
         //Owl Slider
         //==================
-        var slider = new PgComponentType('owl-carousel-slider', 'OWL Carousel and Slider');
+        var slider = new PgComponentType('owl-carousel-slider', 'OWL Slider');
 
         //How can we identify DOM elements that are sliders?
-        slider.selector = ".owl_slider";
+        slider.selector = ".owl-carousel";
 
         //Html code for slider, that will be inserted into the page
         slider.code = function() {
             var id = pinegrow.getUniqueId('owl_slider');
-            var img1 = pinegrow.getPlaceholderImage();
-            var img2 = pinegrow.getPlaceholderImage();
-            var img3 = pinegrow.getPlaceholderImage();
-            var img4 = pinegrow.getPlaceholderImage();
 
             return '<div id="' + id + '" class="owl-carousel">\
                     <div class="item" >\
-                        <img src="' + img1 + '">\
+                        <img src="$IMAGE_URL">\
                     </div>\
                     <div class="item" >\
-                        <img src="' + img2 + '">\
+                        <img src="$IMAGE_URL">\
                     </div>\
                     <div class="item" >\
-                        <img src="' + img3 + '">\
+                        <img src="$IMAGE_URL">\
                     </div>\
                      <div class="item" >\
-                        <img src="' + img4 + '">\
+                        <img src="$IMAGE_URL">\
                     </div>\
                  </div>';
              };
@@ -61,12 +57,13 @@ $(function() {
             if(id) {
                 var ini_str = 'jQuery(function($){\
                                \n var $rows = $("div#'+id+'").attr("data-rows");\
-                               \n var $navigation = Boolean($("div#'+id+'").attr("data-navigation"));\
-                               \n var $singleItem = Boolean($("div#'+id+'").attr("data-single"));\
+                               \n var $navigation = Boolean($("#'+id+'").attr("data-navigation"));\
+                               \n var $singleItem = Boolean($("#'+id+'").attr("data-single"));\
                                \n if (typeof($rows) == "undefined"){$rows="4";}\
-                               \n $("div#' + id + '").owlCarousel({items:$rows,navigation:$navigation,singleItem:$singleItem);\n });';
+                               \n $("#' + id + '").owlCarousel({items:$rows,navigation:$navigation,singleItem:$singleItem});\
+                               \n });';
                 pinegrow.addScriptToPage(page, ini_str);
-                pinegrow.showNotice('<p>Revolution slider initialization Javascript was appended to the end of the page:</p><pre>' + escapeHtmlCode(ini_str) + '</pre><p>If you change the #id of the slider element you\'ll need to update the selector in this code. You also need to <b>include Revolution slider Javascript</b> to the page.</p>', 'Revolution Slider inserted', 'revolution-on-inserted');
+                pinegrow.showNotice('<p>OWL slider initialization Javascript was appended to the end of the page:</p><pre>' + escapeHtmlCode(ini_str) + '</pre><p>If you change the #id of the slider element you\'ll need to update the selector in this code. You also need to <b>include OWL slider Javascript</b> to the page.</p>', 'OWL Slider inserted', 'owl-on-inserted');
             }
         }
      //Set empty_placeholder to true so that empty container gets min-height set. Otherwise empty container would be invisible. This lets us see it and use it as drop target. Placeholder style gets removed as soon as we add something to this element.
@@ -94,7 +91,7 @@ $(function() {
             var img1 = pinegrow.getPlaceholderImage();
 
             return '<div class="item">\
-                        <img src="' + img1 + '">\
+                        <img src="$IMAGE_URL">\
                     </div>';
         };
 
@@ -129,7 +126,7 @@ $(function() {
 
          //Properties are arranged in sections
         var application_action = new PgComponentType('owl-app-rows', 'Number of Items per Row');
-        application_action.selector = ".owl-carousel";
+        //application_action.selector = ".owl-carousel";
         application_action.attribute = 'data-rows';
         application_action.action = true;
         application_action.not_main_type = true;
@@ -150,7 +147,7 @@ $(function() {
         };
          directives_actions.push(application_action);
         application_action = new PgComponentType('owl-app-navigation', 'Enable/Disable Navigation');
-        application_action.selector = ".owl-carousel";
+        //application_action.selector = ".owl-carousel";
         application_action.attribute = 'data-navigation';
         application_action.action = true;
         application_action.not_main_type = true;
@@ -174,8 +171,8 @@ $(function() {
             }
         };
         directives_actions.push(application_action);
-                application_action = new PgComponentType('owl-app-single', 'Enable Single Item');
-        application_action.selector = ".owl-carousel";
+        application_action = new PgComponentType('owl-app-single', 'Enable Single Item');
+        //application_action.selector = ".owl-carousel";
         application_action.attribute = 'data-single';
         application_action.action = true;
         application_action.not_main_type = true;
@@ -207,10 +204,12 @@ $(function() {
         }
 
         addComponentTypesToPG(directives_actions);
-         var section = new PgFrameworkLibSection('owldirectivesactions', 'Owl Carosel');
+
+        var section = new PgFrameworkLibSection('owldirectivesactions', 'Owl Slider');
         section.setComponentTypes( directives_actions );
         section.closed = true;
         f.addActionsSection(section);
+
         //Now, lets define sections and elements shown in LIB tab
         var section = new PgFrameworkLibSection('owl-elements', 'Owl Slider');
         //Pass components in array
