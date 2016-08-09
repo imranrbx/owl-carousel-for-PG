@@ -4,8 +4,8 @@ This is a plugin for Pinegrow, to download trial version of Pinegrow just visit 
 
 ## Animate CSS
 
- Animate.css has been added so now you can use Animate.css by adding the parameters.animateOut: 'slideOutDown',animateIn: 'flipInX', 
- default parameters for owl carousel are:
+ Animate.css has been added so now you can use Animate.css you can visit https://daneden.github.io/animate.css/ for more effects.
+ default parameters for owl carousel are: 
  
 	    items:4,
 	    nav:true,
