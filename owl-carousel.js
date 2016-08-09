@@ -264,9 +264,9 @@ $(function() {
                             'attribute' : 'data-src',
                             'attribute_keep_if_empty' : false
                         }
-                        
+                            
                     }
-            }
+                }
         };
 
 
