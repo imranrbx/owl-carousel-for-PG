@@ -19,7 +19,7 @@ thing easy for you). To see examples and a demo visit http://www.owlcarousel.owl
 
 ## How to use This Plugin
 
-1) Make sure you have jQuery Added to the page before activating the plugin. if you don't know how to add jquery then just add the following line before </head> of your web page.
+1) Make sure you have jQuery Added to the page before activating the plugin. if you don't know how to add jquery then just add the following line before closing head tag of your web page.
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		
