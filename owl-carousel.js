@@ -2,7 +2,7 @@
 Created by itsmeleo for Pinegrow Web Editor
 Licensed under MIT license
 Feel free to use the code in your own Pinegrow
- */
+*/
 $(function() {
 
     //Wait for Pinegrow to wake-up
@@ -29,12 +29,12 @@ $(function() {
 
         //How can we identify DOM elements that are sliders?
         slider.selector = ".owl-carousel";
-
+        
         //Html code for slider, that will be inserted into the page
         slider.code = function() {
             var id = pinegrow.getUniqueId('owl_slider');
 
-            return '<div id="' + id + '" class="owl-carousel">\
+            return '<div id="' + id + '" class="owl-carousel" data-parameters="items:4,nav:true">\
                     <div class="item " >\
                         <img src="$IMAGE_URL" class="lazyOwl">\
                     </div>\
@@ -55,21 +55,13 @@ $(function() {
             var id = $el.attr('id');
             if(id) {
                 var ini_str = 'jQuery(function($){\
-                               \n var $rows = $("div#'+id+'").attr("data-rows");\
-                               \n var $navigation = $("#'+id+'").attr("data-navigation");\
-                               \n var $singleItem = $("#'+id+'").attr("data-single");\
-                               \n var $lazyload = $("#'+id+'").attr("data-lazy");\
-                               \n var $speed = $("#'+id+'").attr("data-speed");\
-                               \n var $transition = $("#'+id+'").attr("data-transition");\
-                               \n if (typeof($rows) == "undefined"){$rows="4";}\
-                               \n if (typeof($speed) == "undefined"){$speed=false;}\
+                               \n var $parameters = $("div#'+id+'").attr("data-parameters");\
+                               \n var $obj = eval("({" + $parameters + "})");\
                                \n $("#' + id + '").owlCarousel({\
-                                \n items: $rows,\
-                                \n autoPlay: $speed,\
-                                \n transitionStyle: $transition,\
-                                \n navigation: Boolean($navigation),\
-                                \n singleItem: Boolean($singleItem),\
-                                \n lazyLoad: Boolean($lazyload)\
+                                \n    items: $obj.items,\
+                                \n    nav: $obj.nav,\
+                                \n    animateOut: $obj.animateOut,\
+                                \n    animateIn: $obj.animateIn,\
                                 \n });\
                                \n });';
                 pinegrow.addScriptToPage(page, ini_str);
@@ -160,6 +152,12 @@ $(function() {
         r.footer = false;
         f.resources.add(r);
 
+        r = new PgComponentTypeResource(f.getResourceFile('./assets/animate.css'));
+        r.relative_url = 'css/animate.css';
+        r.source = crsaMakeFileFromUrl(r.url);
+        r.footer = false;
+        f.resources.add(r);
+
         r = new PgComponentTypeResource(f.getResourceFile('./assets/grabbing.png'));
         r.relative_url = 'css/grabbing.png';
         r.source = crsaMakeFileFromUrl(r.url);
@@ -171,7 +169,7 @@ $(function() {
         r.source = crsaMakeFileFromUrl(r.url);
         r.footer = false;
         f.resources.add(r);
-        
+
         r = new PgComponentTypeResource(f.getResourceFile('./assets/owl.video.play.png'));
         r.relative_url = 'css/owl.video.play.png';
         r.source = crsaMakeFileFromUrl(r.url);
@@ -182,7 +180,7 @@ $(function() {
             'owl.app.single' : {
                 'name' : 'Owl Slider Properties',
                 'fields' : {
-                    'owl.app.checkbox1': {
+                    /*'owl.app.checkbox1': {
                             'type' : 'checkbox',
                             'name' : 'Show Single Image ?',
                             'value' : "1",
@@ -204,8 +202,8 @@ $(function() {
                                 }
                                 return value;
                             }
-                        },
-                         'owl.app.checkbox2': {
+                        },*/
+                        /* 'owl.app.checkbox2': {
                              'type' : 'checkbox',
                             'name' : 'Show Navigation ?',
                             'value' : "1",
@@ -233,6 +231,7 @@ $(function() {
                             'name' : 'How Many Images:',
                             'action' : 'element_attribute',
                             'attribute' : 'data-rows',
+                             'placeholder': 'Default: 4',
                             'attribute_keep_if_empty' : false
                     },
                     'owl.app.checkbox3': {
@@ -270,20 +269,19 @@ $(function() {
                                         {'key' : 'goDown', 'name' : 'goDown'},
                                         {'key' : 'backSlide', 'name' : 'backSlide'},   
                                     ]
-                            },
-                        'owl.app.speed': {
+                            },*/
+                        'owl.app.parameters': {
                             'type' : 'text',
-                            'name' : 'Autoplay Speed',
+                            'name' : 'Parameters',
                             'action' : 'element_attribute',
-                            'attribute' : 'data-speed',
+                            'attribute' : 'data-parameters',
+                             'placeholder': 'Default: items:4,nav:true',
                             'attribute_keep_if_empty' : false
                     }
                         
                     }
             }
         };
-
-
         slide.sections = {
             'owl.app.lazyimg' : {
                 'name' : 'Owl Slide',
@@ -304,8 +302,8 @@ $(function() {
                 'name' : 'Owl Video',
                 'fields' : {
                         'owl.app.video': {
-                            'type' : 'text',
-                            'name' : 'Href',
+                            'type' : 'image',
+                            'name' : 'url',
                             'action' : 'element_attribute',
                             'attribute' : 'href',
                             'attribute_keep_if_empty' : false
