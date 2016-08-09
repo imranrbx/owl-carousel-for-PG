@@ -15,12 +15,19 @@ This is a plugin for Pinegrow, to download trial version of Pinegrow just visit 
 ## How to use This Plugin
 
 1) Make sure you have jQuery Added to the page before activating the plugin. if you don't know how to add jquery then just add the following line before </head> of your web page.
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		
 2) You have to save the page after that
+
 3) load the plugin by click on Manage Library and Plugin 
+
 4) load the plugin
+
 5) Click Add Button
+
 6) Now activate and add resources to page.
+
 
 you will see new option in LIB panel of OWL Slider, just drag and drop OWL slider first then you can add other slides as many as you want. when you select OWL Carousel from right panel, then from Properties you can add different parameters currently noly support four parameters which are mentioned above.
 
