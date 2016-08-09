@@ -35,17 +35,17 @@ $(function() {
             var id = pinegrow.getUniqueId('owl_slider');
 
             return '<div id="' + id + '" class="owl-carousel">\
-                    <div class="item lazyOwl" >\
-                        <img src="$IMAGE_URL">\
+                    <div class="item " >\
+                        <img src="$IMAGE_URL" class="lazyOwl">\
                     </div>\
-                    <div class="item lazyOwl" >\
-                        <img src="$IMAGE_URL">\
+                    <div class="item"  >\
+                        <img src="$IMAGE_URL" class="lazyOwl">\
                     </div>\
-                    <div class="item lazyOwl" >\
-                        <img src="$IMAGE_URL">\
+                    <div class="item" >\
+                        <img src="$IMAGE_URL" class="lazyOwl">\
                     </div>\
-                     <div class="item lazyOwl" >\
-                        <img src="$IMAGE_URL">\
+                     <div class="item" >\
+                        <img src="$IMAGE_URL" class="lazyOwl">\
                     </div>\
                  </div>';
              };
@@ -90,10 +90,10 @@ $(function() {
         var slide = new PgComponentType('Owl-Slide', 'Slide');
 
         //How can we identify DOM elements that are sliders?
-        slide.selector = function($el) {
-            return $el.is('div') && $el.parent().parent().is('.owl_slider');
-        };
-
+        /*slide.selector = function($el) {
+            return $el.is('div') && $el.parent().parent().is('.owl-carousel');
+        };*/
+         slide.selector = ".lazyOwl";
         slide.priority = 100;
 
         //Html code for slider, that will be inserted into the page
@@ -101,7 +101,7 @@ $(function() {
             var img1 = pinegrow.getPlaceholderImage();
 
             return '<div class="item lazyOwl">\
-                        <img src="$IMAGE_URL">\
+                        <img src="$IMAGE_URL" class="lazyOwl">\
                     </div>';
         };
 
@@ -110,6 +110,7 @@ $(function() {
 
         //Add it to our framework
         f.addComponentType(slide);
+
         var r = new PgComponentTypeResource(f.getResourceFile('./assets/owl.carousel.min.js')); //relative to plugin js file
         r.relative_url = 'js/owl.carousel.min.js'; //what should the relative url be when resource is used on the page
         r.source = crsaMakeFileFromUrl(r.url);
@@ -122,7 +123,7 @@ $(function() {
         r.footer = false;
         f.resources.add(r);
 
-          r = new PgComponentTypeResource(f.getResourceFile('./assets/owl.theme.css'));
+        r = new PgComponentTypeResource(f.getResourceFile('./assets/owl.theme.css'));
         r.relative_url = 'css/owl.theme.css';
         r.source = crsaMakeFileFromUrl(r.url);
         r.footer = false;
@@ -140,7 +141,7 @@ $(function() {
         r.footer = false;
         f.resources.add(r);
 
-         r = new PgComponentTypeResource(f.getResourceFile('./assets/AjaxLoader.gif'));
+        r = new PgComponentTypeResource(f.getResourceFile('./assets/AjaxLoader.gif'));
         r.relative_url = 'css/AjaxLoader.gif';
         r.source = crsaMakeFileFromUrl(r.url);
         r.footer = false;
@@ -250,6 +251,24 @@ $(function() {
                     }
             }
         };
+
+
+        slide.sections = {
+            'owl.app.lazyimg' : {
+                'name' : 'Owl Slide',
+                'fields' : {
+                        'owl.app.lazyimg': {
+                            'type' : 'image',
+                            'name' : 'Lazy Load Image Path',
+                            'action' : 'element_attribute',
+                            'attribute' : 'data-src',
+                            'attribute_keep_if_empty' : false
+                        }
+                        
+                    }
+            }
+        };
+
 
         //Now, lets define sections and elements shown in LIB tab
         var section = new PgFrameworkLibSection('owl-elements', 'Owl Slider');
