@@ -34,7 +34,7 @@ $(function() {
         slider.code = function() {
             var id = pinegrow.getUniqueId('owl_slider');
 
-            return '<div id="' + id + '" class="owl-carousel" data-parameters="items:4,nav:true">\
+            return '<div id="' + id + '" class="owl-carousel" data-parameters=" items:4,nav:true,animateOut: \"slideOutDown\", animateIn: \"flipInX\", ">\
                     <div class="item " >\
                         <img src="$IMAGE_URL" class="lazyOwl">\
                     </div>\
