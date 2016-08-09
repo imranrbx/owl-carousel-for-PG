@@ -34,7 +34,7 @@ $(function() {
         slider.code = function() {
             var id = pinegrow.getUniqueId('owl_slider');
 
-            return '<div id="' + id + '" class="owl-carousel" data-parameters=" items:4,nav:true,animateOut: \"slideOutDown\", animateIn: \"flipInX\", ">\
+            return '<div id="' + id + '" class="owl-carousel" data-parameters=" items:4,nav:true,animateOut:\'fadeOut\',animateIn:\'fadeIn\'">\
                     <div class="item " >\
                         <img src="$IMAGE_URL" class="lazyOwl">\
                     </div>\
@@ -62,6 +62,7 @@ $(function() {
                                 \n    nav: $obj.nav,\
                                 \n    animateOut: $obj.animateOut,\
                                 \n    animateIn: $obj.animateIn,\
+                                \n    margin: 10\
                                 \n });\
                                \n });';
                 pinegrow.addScriptToPage(page, ini_str);
@@ -275,7 +276,7 @@ $(function() {
                             'name' : 'Parameters',
                             'action' : 'element_attribute',
                             'attribute' : 'data-parameters',
-                             'placeholder': 'Default: items:4,nav:true',
+                             'placeholder': 'Default: items:4,nav:true,animateIn: fadeIn, animateOut: fadeOut',
                             'attribute_keep_if_empty' : false
                     }
                         
