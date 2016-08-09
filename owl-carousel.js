@@ -111,6 +111,31 @@ $(function() {
         //Add it to our framework
         f.addComponentType(slide);
 
+        //Add Video slider to the owl carousel
+
+        var video = new PgComponentType('Owl-Slide-video', 'Video');
+
+        //How can we identify DOM elements that are sliders?
+        /*slide.selector = function($el) {
+            return $el.is('div') && $el.parent().parent().is('.owl-carousel');
+        };*/
+         video.selector = ".owl-video";
+        video.priority = 200;
+
+        //Html code for slider, that will be inserted into the page
+        video.code = function() {
+            return '<div class="item-video">\
+                        <a class="owl-video" href="https://www.youtube.com/watch?v=bZ1aQ1AG9og"></a>\
+                    </div>';
+        };
+
+        //Highlight element in the tree to show it is important and has special features
+        video.tags = 'major';
+
+        //Add it to our framework
+        f.addComponentType(video);
+
+
         var r = new PgComponentTypeResource(f.getResourceFile('./assets/owl.carousel.min.js')); //relative to plugin js file
         r.relative_url = 'js/owl.carousel.min.js'; //what should the relative url be when resource is used on the page
         r.source = crsaMakeFileFromUrl(r.url);
@@ -143,6 +168,12 @@ $(function() {
 
         r = new PgComponentTypeResource(f.getResourceFile('./assets/AjaxLoader.gif'));
         r.relative_url = 'css/AjaxLoader.gif';
+        r.source = crsaMakeFileFromUrl(r.url);
+        r.footer = false;
+        f.resources.add(r);
+        
+        r = new PgComponentTypeResource(f.getResourceFile('./assets/owl.video.play.png'));
+        r.relative_url = 'css/owl.video.play.png';
         r.source = crsaMakeFileFromUrl(r.url);
         r.footer = false;
         f.resources.add(r);
@@ -263,7 +294,22 @@ $(function() {
                             'action' : 'element_attribute',
                             'attribute' : 'data-src',
                             'attribute_keep_if_empty' : false
-                        }
+                        },
+                            
+                    }
+                }
+        };
+           video.sections = {
+            'owl.app.video' : {
+                'name' : 'Owl Video',
+                'fields' : {
+                        'owl.app.video': {
+                            'type' : 'text',
+                            'name' : 'Href',
+                            'action' : 'element_attribute',
+                            'attribute' : 'href',
+                            'attribute_keep_if_empty' : false
+                        },
                             
                     }
                 }
@@ -273,7 +319,7 @@ $(function() {
         //Now, lets define sections and elements shown in LIB tab
         var section = new PgFrameworkLibSection('owl-elements', 'Owl Slider');
         //Pass components in array
-        section.setComponentTypes([slider, slide]);
+        section.setComponentTypes([slider, slide, video]);
         f.addLibSection(section);
     });
 });
