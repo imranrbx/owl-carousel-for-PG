@@ -37,6 +37,6 @@ thing easy for you). To see examples and a demo visit http://www.owlcarousel.owl
 you will see new option in LIB panel of OWL Slider, just drag and drop OWL slider first then you can add other slides as many as you want. when you select OWL Carousel from right panel, then from Properties you can add different parameters currently noly support four parameters which are mentioned above.
 
 		
-For PRO version with all features included contact me via Skype:software_solutions.
+The upcoming PRO version will include all the OWL features. If you have any questions or feedback contact me via Skype:software_solutions.
 
 Thank You!
