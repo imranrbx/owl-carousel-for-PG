@@ -1,10 +1,15 @@
 # Owl Carousel v2 Plugin for Pinegrow
 
-This is a plugin for Pinegrow, to download trial version of Pinegrow just visit http://pinegrow.com/ , this plugin will add Basic OWL Carousel v2 functionality with required files, but you must add jquery on your own. for more examples and Demo kindly visit http://www.owlcarousel.owlgraphic.com/ .
+This is a plugin for Pinegrow, to download trial a version of Pinegrow visit http://pinegrow.com/, this plugin adds basic
+OWL Carousel (v2) functionality when activated in Pinegrow, add jquery to your page (http://www.w3schools.com/jquery/jquery_get_started.asp) or use a framework like Bootstrap (Built into Pinegrow to make
+thing easy for you). To see examples and a demo visit http://www.owlcarousel.owlgraphic.com/ .
+
 
 ## Animate CSS
 
- Animate.css has been added so now you can use Animate.css you can visit https://daneden.github.io/animate.css/ for more effects.
+ Animate.css has been added so now you can use Animate.css you can visit https://daneden.github.io/animate.css/ for more
+ effects.
+ 
  default parameters for owl carousel are: 
  
 	    items:4,
