@@ -1,4 +1,8 @@
+
+
 # Owl Carousel v2 Plugin for Pinegrow
+
+![Screenshot](http://pinegrow.com/images/mac@2x.jpg)
 
 This is a plugin for Pinegrow, to download trial a version of Pinegrow visit http://pinegrow.com/, this plugin adds basic
 OWL Carousel (v2) functionality when activated in Pinegrow, add jquery to your page (http://www.w3schools.com/jquery/jquery_get_started.asp) or use a framework like Bootstrap (Built into Pinegrow to make
@@ -38,8 +42,6 @@ you will see new option in LIB panel of OWL Slider, just drag and drop OWL slide
 
 		
 The upcoming PRO version will include all the OWL features. If you have any questions or feedback contact me via Skype:software_solutions.
-
-![Screenshot](http://pinegrow.com/images/mac@2x.jpg)
 
 ## Screenshots from Pro Version
 ![Screenshot](https://github.com/imranrbx/owl-carousel-for-PG/blob/master/pro-screenshots/Screenshot%2001.png)
