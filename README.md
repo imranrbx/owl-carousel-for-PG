@@ -41,5 +41,11 @@ The upcoming PRO version will include all the OWL features. If you have any ques
 
 ![Screenshot](http://pinegrow.com/images/mac@2x.jpg)
 
+## Screenshots from Pro Version
+![Screenshot](https://github.com/imranrbx/owl-carousel-for-PG/blob/master/pro-screenshots/Screenshot%2001.png)
+
+![Screenshot](https://github.com/imranrbx/owl-carousel-for-PG/blob/master/pro-screenshots/Screenshot%2002.png)
+
+![Screenshot](https://github.com/imranrbx/owl-carousel-for-PG/blob/master/pro-screenshots/Screenshot%2003.png)
 
 Thank You!
