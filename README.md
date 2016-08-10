@@ -39,4 +39,7 @@ you will see new option in LIB panel of OWL Slider, just drag and drop OWL slide
 		
 The upcoming PRO version will include all the OWL features. If you have any questions or feedback contact me via Skype:software_solutions.
 
+![Screenshot](http://pinegrow.com/images/mac@2x.jpg)
+
+
 Thank You!
