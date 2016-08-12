@@ -50,7 +50,7 @@ The upcoming PRO version will include all the OWL features. If you have any ques
 
 ![Screenshot](https://github.com/imranrbx/owl-carousel-for-PG/blob/master/pro-screenshots/Screenshot%2003.png)
 
-#Key features of Plugin
+#Key features of PRO Version of Plugin
 
 List including all options from built-in plugins video, lazyload, mousewheel and animate.
 
