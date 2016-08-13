@@ -8,7 +8,9 @@ This is a plugin for Pinegrow, to download trial a version of Pinegrow visit htt
 OWL Carousel (v2) functionality when activated in Pinegrow, add jquery to your page (http://www.w3schools.com/jquery/jquery_get_started.asp) or use a framework like Bootstrap (Built into Pinegrow to make
 thing easy for you). To see examples and a demo visit http://www.owlcarousel.owlgraphic.com/ .
 
+## Plugin Introduction Video
 
+[![ScreenShot](https://github.com/imranrbx/owl-carousel-for-PG/blob/master/pro-screenshots/screenshot.png)](https://youtu.be/CXe9FgqdGnI)
 ## Animate CSS
 
  Animate.css has been added so now you can use Animate.css you can visit https://daneden.github.io/animate.css/ for more
