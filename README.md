@@ -50,4 +50,177 @@ The upcoming PRO version will include all the OWL features. If you have any ques
 
 ![Screenshot](https://github.com/imranrbx/owl-carousel-for-PG/blob/master/pro-screenshots/Screenshot%2003.png)
 
+#Key features of PRO Version of Plugin
+
+List including all options from built-in plugins video, lazyload, mousewheel and animate.
+
+##mousewheel
+
+To add mouswheel scrolling just included the fantastic plugin jquery.mousewheel.js created by Brandon Aaron. Link to plugin GitHub page https://github.com/brandonaaron/jquery-mousewheel
+
+##items
+Type: Number 
+Default: 3
+
+The number of items you want to see on the screen.
+
+##margin
+Type: Number 
+Default: 0
+
+margin-right(px) on item.
+
+##loop
+Type: Boolean 
+Default: false
+
+Inifnity loop. Duplicate last and first items to get loop illusion.
+
+##center
+Type: Boolean 
+Default: false
+
+Center item. Works well with even an odd number of items.
+
+##mouseDrag
+Type: Boolean 
+Default: true
+
+Mouse drag enabled.
+
+##touchDrag
+Type: Boolean 
+Default: true
+
+Touch drag enabled.
+
+##pullDrag
+Type: Boolean 
+Default: true
+
+Stage pull to edge.
+
+##freeDrag
+Type: Boolean 
+Default: false
+
+Item pull to edge.
+
+##stagePadding
+Type: Number 
+Default: 0
+
+Padding left and right on stage (can see neighbours).
+
+##merge
+Type: Boolean 
+Default: false
+
+Merge items. Looking for data-merge='{number}' inside item..
+
+##mergeFit
+Type: Boolean 
+Default: true
+
+Fit merged items if screen is smaller than items value.
+
+##autoWidth
+Type: Boolean 
+Default: false
+
+Set non grid content. Try using width style on divs.
+
+##nav
+Type: Boolean 
+Default: false
+
+Show next/prev buttons.
+
+#navRewind
+Type: Boolean 
+Default: true
+
+Go to first/last.
+
+
+##slideBy
+Type: Number/String 
+Default: 1
+
+Navigation slide by x. 'page' string can be set to slide by page.
+
+##dots
+Type: Boolean 
+Default: true
+
+Show dots navigation.
+
+##lazyLoad
+Type: Boolean 
+Default: false
+
+Lazy load images. data-src and data-src-retina for highres. Also load images into background inline style if element is not <img>
+
+##autoplay
+Type: Boolean 
+Default: false
+
+Autoplay.
+
+##autoplayTimeout
+Type: Number 
+Default: 5000
+
+Autoplay interval timeout.
+
+##autoplayHoverPause
+Type: Boolean 
+Default: false
+
+Pause on mouse hover.
+
+
+##autoplaySpeed
+Type: Number/Boolean 
+Default: false
+
+autoplay speed.
+
+
+##video
+Type: Boolean 
+Default: false
+
+Enable fetching YouTube/Vimeo videos.
+
+##videoHeight
+Type: Number/Boolean 
+Default: false
+
+Set height for videos.
+
+##videoWidth
+Type: Number/Boolean 
+Default: false
+
+Set width for videos.
+
+##animateOut
+Type: String/Bolean 
+Default: false
+
+CSS3 animation out.
+
+##animateIn
+Type: String/Bolean 
+Default: false
+
+CSS3 animation in.
+
+##fallbackEasing
+Type: String 
+Default: swing
+
+Easing for CSS2 $.animate.
+
 Thank You!
